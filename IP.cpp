@@ -50,7 +50,7 @@ int main(){
     cityIps.push_back(ip1);
     cityIps.push_back(ip2);
     cityIps.push_back(ip3);
-    string inputIp = "4.7.0.1000";
+    string inputIp = "1.0.1.25";
     vector<string> inputIpSplit = streamString(inputIp);
     string city = binarySearch(cityIps, inputIpSplit);
     cout<<city<<" ";
