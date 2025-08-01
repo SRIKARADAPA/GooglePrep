@@ -49,7 +49,7 @@ string unionGroups(unordered_map<string,string> &parentMap,  unordered_map<strin
     return ans;
 }
 int main(){
-    vector<string> friends = {"Alice", "Bob", "Charlie", "Dan", "Erin"};
+    vector<string> friends = {"Alice", "Bob", "Charlie", "Dan", "Erin", "ahah"};
     vector<string> eventLogs = {"1648305616 Alice and Bob became friends", "1648305678 Charlie and Dan became friends", "1648306171 Bob and Charlie became friends", 
         "1648306237 Alice and Erin became friends"};
     vector<vector<string>> processedLogs = processLogs(eventLogs);

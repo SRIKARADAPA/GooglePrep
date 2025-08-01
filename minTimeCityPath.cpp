@@ -36,12 +36,37 @@ int findMinTime(unordered_map<int, vector<int>> &adjacencyList, unordered_set<in
     }
     return ans;
 }
+int findMinCost(unordered_map<int, vector<int>> &adjacencyList, unordered_set<int> &blockedCities, int source, int destination){
+    unordered_map<int,int> cityCostMap;
+    cityCostMap[source] = 0;
+    queue<pair<int,int>> cities;
+    cities.emplace(source,0);
+    while(!cities.empty()){
+        int city = cities.front().first;
+        int costTaken = cities.front().second;
+        cities.pop();
+        costTaken+=(blockedCities.find(city) != blockedCities.end());
+        for(int i=0;i<adjacencyList[city].size();i++){
+            int neighbor = adjacencyList[city][i];
+            if(cityCostMap.count(neighbor)==0){
+                cityCostMap[neighbor] = costTaken;
+                cities.emplace(neighbor, costTaken);
+            }
+            else if(cityCostMap.count(neighbor)!=0 && cityCostMap[neighbor]>costTaken){
+                cityCostMap[neighbor] = costTaken;
+                cities.emplace(neighbor, costTaken);
+            }
+        }
+    }
+    return cityCostMap[destination];
+}
 int main(){
     vector<vector<int>> edges = {{1,2},{2,3},{3,4},{4,6},{6,5},{5,7},{7,1}};
-    unordered_set<int> blockedCities = {2}; 
+    unordered_set<int> blockedCities = {2,7,5,3}; 
     int source = 1;
     int destination = 4;
     unordered_map<int, vector<int>> adjacencyList;
     buildGraph(adjacencyList, edges);
-    cout<<findMinTime(adjacencyList, blockedCities, source, destination)<<" ";
+    // cout<<findMinTime(adjacencyList, blockedCities, source, destination)<<" ";
+    cout<<findMinCost(adjacencyList, blockedCities, source, destination)<<" ";
 }
